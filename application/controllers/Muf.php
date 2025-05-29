@@ -1,51 +1,77 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Muf extends CI_Controller {
-    public function index() {
+class Muf extends MY_Controller
+{
+    const CACHE_TIME = 900; // in seconds (30 minutes)
+
+    public function index()
+    {
         $token = $this->get_token_api_muf();
         $data['areas'] = $this->get_area_from_api($token);
         $this->load->view('muf', $data);
     }
-    private function get_token_api_muf() {    
-        $username = 'bisaaja_id';
-        $password = 'u4cg8MQnQom2spDFjQDHaerH';
 
-        $url = 'https://mufdana.muf.co.id/dev/partners/login';
-        $payload = json_encode([
-            'username' => $username,
-            'password' => $password
-        ]);
+    private function get_token_api_muf()
+    {
+        $key = 'cache_token_api_muf';
+        $token = $this->cache->get($key);
 
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json'
-        ]);
+        if (!$token) {
+            $username = 'bisaaja_id';
+            $password = 'u4cg8MQnQom2spDFjQDHaerH';
 
-        $response = curl_exec($curl);
-        curl_close($curl);
+            $url = 'https://mufdana.muf.co.id/dev/partners/login';
+            $payload = json_encode([
+                'username' => $username,
+                'password' => $password
+            ]);
 
-        $result = json_decode($response, true);
-        return $result['token'];
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $payload);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/json'
+            ]);
+
+            $response = curl_exec($curl);
+            curl_close($curl);
+
+            $result = json_decode($response, true);
+            $token = $result['token'] ?? null;
+            if ($token) {
+                $this->cache->save($key, $token, self::CACHE_TIME);
+            }
+        }
+
+        return $token;
     }
 
-    private function get_area_from_api($token) {
-        $url = 'https://mufdana.muf.co.id/dev/partners/api/area';
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Authorization: Bearer ' . $token
-        ]);
+    private function get_area_from_api($token)
+    {
+        $key = "cache_area_from_api_$token";
+        $area = $this->cache->get($key);
 
-        $response = curl_exec($curl);
-        curl_close($curl);
+        if (!$area) {
+            $url = 'https://mufdana.muf.co.id/dev/partners/api/area';
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                'Authorization: Bearer ' . $token
+            ]);
 
-        $result = json_decode($response, true);
+            $response = curl_exec($curl);
+            curl_close($curl);
 
-        // Sesuaikan format tergantung respon API
-        return isset($result['data']) ? $result['data'] : [];
-    }    
+            $result = json_decode($response, true);
+
+            // Sesuaikan format tergantung respon API
+            $area = $result['data'] ?? [];
+            $area = json_encode($area);
+            $this->cache->save($key, $area, self::CACHE_TIME);
+        }
+
+        return json_decode($area, true);
+    }
 }
