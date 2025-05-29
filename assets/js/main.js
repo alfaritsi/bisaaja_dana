@@ -61,7 +61,7 @@ $('#tipe_kendaraan').change(function() {
           dataType: 'json',
           success: function(data) {
               $('#tahun_kendaraan').empty();
-              $('#tahun_kendaraan').append('<option value="">Pilih Tipe Kendaraan</option>');
+              $('#tahun_kendaraan').append('<option value="">Pilih Tahun Kendaraan</option>');
               $.each(data.data, function(index, item) {
                   $('#tahun_kendaraan').append('<option value="'+ item.availableyear +'">'+ item.availableyear +'</option>');
               });
