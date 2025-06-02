@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="author" content="DSAThemes"/>	
-		<meta name="description" content="OLMO - Software, App, SaaS & Startup Landing Pages Pack"/>
-		<meta name="keywords" content="Responsive, HTML5, DSAThemes, One Page, Landing, Software, Mobile App, SaaS, Startup, Creative, Freelancers, Digital Product">	
+		<meta name="description" content="BisaAja Multifinance adalah layanan digital yang menghubungkan pengguna dengan penyedia dana terpercaya untuk kebutuhan pembiayaan secara cepat, mudah, dan aman."/>
+		<meta name="keywords" content="BisaAja, BisaAja Multifinance, pembiayaan, pinjaman online, bantuan dana, platform fintech, mitra penyedia dana, pengajuan pinjaman, layanan keuangan digital">	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   		<!-- SITE TITLE -->
 		<title>BisaAja Multifinance - Pinjam dana tanpa ribet</title>
