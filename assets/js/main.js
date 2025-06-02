@@ -128,6 +128,8 @@ $('.btn_back_tenor').click(function() {
 
 //get max
 $('.btn_simulasi').click(function() {
+    var nomor = $('[name="nomor"]').val();
+    var email = $('[name="email"]').val();
     var jenis_kendaraan = $('#jenis_kendaraan').val();
     var tipe_kendaraan = $('#tipe_kendaraan').val();
     var merk_kendaraan = $('#merk_kendaraan').val();
@@ -136,6 +138,11 @@ $('.btn_simulasi').click(function() {
     var harga_kendaraan = $('#harga_kendaraan').val();
     var input_pinjam = $('#input_pinjam').val();
     // Validasi
+    if (nomor=='') {
+        alert('Nomor HP/WA wajib isi.');
+        $('.nomor').focus();
+        return;
+    }
     if (region_kendaraan=='') {
         alert('Area tinggal wajib diisi.');
         $('#region_kendaraan').focus();

@@ -208,14 +208,15 @@
                     </div>    
 					<form name="contactform" class="row contact-form">
 						<!-- Contact Form Input -->
-						<!-- <div class="col-md-6">
+						<div class="col-md-6">
 							<span>Nomor HP/WA:</span>
-							<input type="text" name="nomor_wa" class="form-control name" placeholder="Masukan Nomor HP/WA"> 
+							<input type="number" name="nomor" class="form-control name" placeholder="Masukan Nomor HP/WA"> 
 						</div>
 						<div  class="col-md-6">
 							<span>Email:</span>
 							<input type="text" name="email" class="form-control email" placeholder="Masukan Email"> 
 						</div>
+						<!-- 
 						<div class="col-md-6 input-subject">
 							<span>Memiliki Rekening Bank Mandiri?</span>
 							<select class="form-select subject" aria-label="Default select example">
@@ -400,14 +401,14 @@
 							<span>Nama Lengkap:</span>
 							<input type="text" name="name" class="form-control name" placeholder="Masukan Nama Lengkap"> 
 						</div>
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<span>Nomor HP/WA:</span>
 							<input type="text" name="nomor" class="form-control nomor" placeholder="Masukan Nomor HP/WA"> 
 						</div>
 						<div  class="col-md-6">
 							<span>Email:</span>
 							<input type="text" name="email" class="form-control email" placeholder="Masukan Email"> 
-						</div>
+						</div> -->
 						<div  class="col-md-6">
 							<span>Tanggal Lahir:</span>
 							<input type="date" name="dob" class="form-control dob" placeholder="Masukan Tanggal Lahir"> 
